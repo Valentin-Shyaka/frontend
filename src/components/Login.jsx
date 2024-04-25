@@ -11,7 +11,7 @@ const Login = () => {
 
     const handleSubmit=(event)=>{
         event.preventDefault()
-        axios.post("http://localhost:3001/auth/login",values)
+        axios.post("http://localhost:3001/auth/adminLogin",values)
             .then(result =>console.log(result))
             .then(err =>console.log(err))
     }
