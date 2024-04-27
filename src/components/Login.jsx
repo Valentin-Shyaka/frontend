@@ -9,13 +9,20 @@ const Login = () => {
         email:'',
         password:''
     })
-
+    const [error,setError]= useState('')
     const navigate= useNavigate()
     axios.defaults.withCredentials= true
     const handleSubmit=(event)=>{
         event.preventDefault()
         axios.post("http://localhost:3001/auth/adminLogin",values)
-            .then(result =>navigate('/dashboard'))
+            .then(result =>{
+                if(result.data.loginStatus){
+                    navigate('/dashboard')
+                }else{
+                    setError(result.data.Error)
+                }
+             } )
+           
             .then(err =>console.log(err))
     }
   return (
@@ -27,6 +34,7 @@ const Login = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Sign in to your account
               </h1>
+              <div className='text-denger text-red-500'>{error && error}</div>
               <form className="space-y-4 md:space-y-6" action="#" onSubmit={handleSubmit}>
                   <div>
                       <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
