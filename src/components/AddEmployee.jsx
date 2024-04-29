@@ -6,7 +6,7 @@ import { HiMail } from "react-icons/hi";
 
 const AddEmployee = () => {
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 mt-10 rounded-lg p-20">
+    <div className="bg-gray-50 dark:bg-gray-900 mt-2 rounded-lg p-10">
     <div className="flex flex-col items-center justify-center ">
       
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
