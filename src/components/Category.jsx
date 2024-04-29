@@ -9,6 +9,9 @@ const Category = () => {
 
         </div>
         <Link to={'/dashboard/add_category'} className=' border border-blue-500 bg-blue-500 p-2 rounded-md text-white outline-none'>Add Category</Link>
+        <div>
+          
+        </div>
     </div>
   )
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Box, Button, Input, InputWrapper, PasswordInput } from '@mantine/core';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +13,7 @@ const Login = () => {
     axios.defaults.withCredentials= true
     const handleSubmit=(event)=>{
         event.preventDefault()
-        axios.post("http://localhost:3001/auth/adminLogin",values)
+        axios.post("http://localhost:3001/admin/adminLogin",values)
             .then(result =>{
                 if(result.data.loginStatus){
                     navigate('/dashboard')
