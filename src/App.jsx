@@ -2,6 +2,7 @@
 import './App.css';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import Login from './components/Login';
+import React from 'react';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import Employee from './components/Employee';
@@ -12,6 +13,7 @@ import AddEmployee from './components/AddEmployee'
 
 function App() {
   return (
+    <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path={'/adminLogin'} element={<Login/>}></Route>
@@ -25,6 +27,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </React.StrictMode>
     
   );
 }
