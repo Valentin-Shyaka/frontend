@@ -54,7 +54,7 @@ const Employee = () => {
                 
                 
                 <Table.Cell>
-                  <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                  <a href={`/dashboard/EditEmployee/${item.id}`} className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                     Edit
                   </a>
                 </Table.Cell>
