@@ -54,7 +54,7 @@ const EditEmployee = () => {
 
 
     }
-    console.log(employee)
+    
     
   return (
     <div className="bg-gray-50 dark:bg-gray-900 mt-5 rounded-lg p-20">
