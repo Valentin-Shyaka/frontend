@@ -11,13 +11,17 @@ import Profile from './components/Profile';
 import AddCategory from './components/AddCategory';
 import AddEmployee from './components/AddEmployee'
 import EditEmployee from './components/EditEmployee';
+import EmployeeLogin from './components/EmployeeLogin';
+import Landing from './components/Landing';
 
 function App() {
   return (
     <React.StrictMode>
     <BrowserRouter>
       <Routes>
+      <Route path={'/'} element={<Landing/>}></Route>
         <Route path={'/adminLogin'} element={<Login/>}></Route>
+        <Route path={'/employeeLogin'} element={<EmployeeLogin/>}></Route>
         <Route path={'/dashboard'} element={<Dashboard/>}>
           <Route path='' element={<Home/>}/>
           <Route path='/dashboard/employee' element={<Employee/>}/>
