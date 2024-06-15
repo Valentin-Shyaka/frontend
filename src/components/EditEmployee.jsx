@@ -23,12 +23,6 @@ const EditEmployee = () => {
     })
 
     useEffect(() => {
-        axios.get('http://localhost:3001/admin/category')
-        .then(result =>{
-          
-            setCategory(result.data.Result.rows)
-        }).catch(err => console.log(err))
-
         axios.get(`http://localhost:3001/admin/employee/${id}`)
         .then(result=>{
            setEmployee(result.data.Result.rows)

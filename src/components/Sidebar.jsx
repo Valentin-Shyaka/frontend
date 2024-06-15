@@ -6,7 +6,7 @@ import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, Hi
 
 export function SidebarComponent() {
   return (
-    <Sidebar aria-label="Sidebar with content separator example" className="h-screen">
+    <Sidebar aria-label="Sidebar with content separator example" className="h-screen ">
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Item href="/dashboard" icon={HiChartPie}>
@@ -15,8 +15,8 @@ export function SidebarComponent() {
           <Sidebar.Item href="/dashboard/employee" icon={HiViewBoards}>
             Manage employees
           </Sidebar.Item>
-          <Sidebar.Item href="/dashboard/category" icon={HiInbox}>
-            Category
+          <Sidebar.Item href="/dashboard/laptops" icon={HiInbox}>
+            Laptops
           </Sidebar.Item>
           <Sidebar.Item href="/dashboard/profile" icon={HiUser}>
             Profile

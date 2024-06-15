@@ -1,119 +1,88 @@
-import React from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import { Label, TextInput , Select} from "flowbite-react";
-import { useState,useEffect } from 'react';
-import * as Yup from 'yup'
+import React,{useState} from 'react'
+import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { HiMail } from "react-icons/hi";
-import AppServices from '../services'
+import AppServices from '../services/index';
 
-const AddEmployee = () => {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
-    const navigate = useNavigate();
+
   
-    const validationSchema = Yup.object().shape({
-      firstName: Yup.string().required("First name is required"),
-      lastName: Yup.string().required("Last name is required"),
-      phone: Yup.string()
-        .matches(/^\d+$/, "Phone must contain only numerical characters")
-        .required("Phone is required")
-        .min(10, "Phone must be 10 characters")
-        .max(10, "Phone must be 10 characters"),
-      email: Yup.string().email("Invalid email").required("Email is required"),
-    //   password: Yup.string()
-    //     .required("Password is required")
-    //     .min(6, "Password must be at least 6 characters"),
-      nationalId: Yup.string()
-        .matches(/^\d+$/, "ID must contain only numerical characters")
-        .required("NID is required")
-        .min(16, "NID must be 16 characters")
-        .max(16, "NID must be 16 characters"),
-    });
-  
-    const handleSubmit = async (values, { resetForm }) => {
-      try {
-        setLoading(true);
-        setError('');
-        const response = await AppServices.employeeRegister({...values,department:"IT",position:"manager"} );
-        if (response?.status === 201) {
-          setLoading(false);
-          navigate('/dashboard/employee');
-          resetForm();
-        } else {
-          setLoading(false);
-          setError(response?.message || 'Error occurred while logging in');
-        }
-      } catch (submissionError) {
+
+const Signup = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const validationSchema = Yup.object().shape({
+    fullNames: Yup.string().required("Full Names is required"),
+    phone: Yup.string()
+      .matches(/^\d+$/, "Phone must contain only numerical characters")
+      .required("Phone is required")
+      .min(10, "Phone must be 10 characters")
+      .max(10, "Phone must be 10 characters"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(6, "Password must be at least 6 characters"),
+    nationalId: Yup.string()
+      .matches(/^\d+$/, "ID must contain only numerical characters")
+      .required("NID is required")
+      .min(16, "NID must be 16 characters")
+      .max(16, "NID must be 16 characters"),
+  });
+
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      setLoading(true);
+      setError('');
+      const response = await AppServices.AdminRegister({...values,department:"IT",position:"manager"} );
+      if (response?.status === 201) {
         setLoading(false);
-        setError(submissionError?.message || 'An error occurred');
+        navigate('/adminLogin');
+        resetForm();
+      } else {
+        setLoading(false);
+        setError(response?.message || 'Error occurred while logging in');
       }
-    };
-  
-    const formik = useFormik({
-      initialValues: { email: '',lastName:'',firstName:'',phone:'',nationalId:""},
-      validationSchema,
-      onSubmit: handleSubmit,
-    });
-  
-    const { handleChange, handleBlur, handleSubmit: submitForm, values, errors, touched } = formik;
+    } catch (submissionError) {
+      setLoading(false);
+      setError(submissionError?.message || 'An error occurred');
+    }
+  };
 
-   
+  const formik = useFormik({
+    initialValues: { email: '', password: '',fullNames:"",phone:'',nationalId:""},
+    validationSchema,
+    onSubmit: handleSubmit,
+  });
+
+  const { handleChange, handleBlur, handleSubmit: submitForm, values, errors, touched } = formik;
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 mt-5 rounded-lg p-20">
-    <div className="flex flex-col items-center justify-center ">
-      
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    Add Employee
-                </h1>
-                
-                {error && <div className="text-red-500 text-sm">{error}</div>}
+    <section className="bg-gray-50 dark:bg-gray-900">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-lg xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div className="p-6 space-y-4 md:space-y-6 sm:p-6">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              Sign Up 
+            </h1>
+            {error && <div className="text-red-500 text-sm">{error}</div>}
             <form className="space-y-4 md:space-y-6  gap-4 w-full h-fit " onSubmit={submitForm}>
-              
-              
-            <div className='flex w-full justify-between'>
-
-<div>
-  <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-    First Name
-  </label>
-  <input
-    onChange={handleChange}
-    onBlur={handleBlur}
-    value={values.firstName}
-    type="text"
-    name="firstName"
-    id="firstName"
-    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-    placeholder="John"
-    required=""
-  />
-  {touched.firstName && errors.firstName && <div className="text-red-500 text-sm">{errors.firstName}</div>}
-</div>
-<div>
-  <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-    Last Name
-  </label>
-  <input
-    onChange={handleChange}
-    onBlur={handleBlur}
-    value={values.lastName}
-    type="text"
-    name="lastName"
-    id="lastName"
-    placeholder="Doe"
-    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-    required=""
-  />
-  {touched.lastName && errors.lastName && <div className="text-red-500 text-sm">{errors.lastName}</div>}
-</div>
-</div>
-
-
-
+              <div>
+                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Full Names
+                </label>
+                <input
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.fullNames}
+                  type=""
+                  name="fullNames"
+                  id="fullNames"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John Doe"
+                  required=""
+                />
+                {touched.fullNames && errors.fullNames && <div className="text-red-500 text-sm">{errors.fullNames}</div>}
+              </div>
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Your email
@@ -151,7 +120,7 @@ const AddEmployee = () => {
                 />
                 {touched.phone && errors.phone && <div className="text-red-500 text-sm">{errors.phone}</div>}
               </div>
-              {/* <div>
+              <div>
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Password
                 </label>
@@ -167,7 +136,7 @@ const AddEmployee = () => {
                   required=""
                 />
                 {touched.password && errors.password && <div className="text-red-500 text-sm">{errors.password}</div>}
-              </div> */}
+              </div>
               </div>
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -222,11 +191,11 @@ const AddEmployee = () => {
                 </a>
               </p>
             </form>
-            </div>
+          </div>
         </div>
-    </div>
-  </div>
+      </div>
+    </section>
   )
 }
 
-export default AddEmployee
+export default Signup
