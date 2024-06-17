@@ -19,6 +19,7 @@ const Laptop = () => {
       const response = await AppServices.getAllLaptops(page,itemsPerPage);
       if (response?.status === 200) {
         setLaptops(response.data.data);
+        console.log(response.data)
         setTotalPages(Math.ceil(response.data.count / itemsPerPage));
         setCurrentPage(page);
       } else {

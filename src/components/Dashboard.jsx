@@ -41,7 +41,7 @@ const Dashboard = () => {
 
           <h1 className='font-bold text-2xl text-slate-700'>Lan<span className=' text-blue-500'>Farm </span>System</h1>
 
-          <div className='bg-slate-200 w-60 h-16 rounded-lg flex p-2 gap-4 justify-center items-center'>
+          <div className='bg-slate-200 w-60 h-16 rounded-lg flex p-2 gap-4 justify-center items-center cursor-pointer'>
             <div className='rounded-full bg-blue-400 p-1 w-10 h-10 flex  self-center items-center text-center justify-center '>
               <p className='text-md font-bold text-slate-700'>{user?.fullNames?.split(" ")[0][0] +""+user?.fullNames?.split(" ")[1][0]}</p>
               

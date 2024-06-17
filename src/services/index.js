@@ -37,8 +37,9 @@ class AppServices {
     return axios.put(`${API_URL}/employees`, body);
   }
 
-  getAllEmployee() {
+  getAllEmployee(page = 2, limit = 5) {
     return axios.get(`${API_URL}/employees/`,{
+      params: { page, limit },
       headers:{
         "Authorization":`Bearer ${localStorage.getItem('token')}` 
       }
