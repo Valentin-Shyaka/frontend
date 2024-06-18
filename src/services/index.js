@@ -4,63 +4,63 @@ export const API_URL = "http://localhost:8001/api";
 
 
 class AppServices {
-  adminLogin(body) {
-    return axios.post(`${API_URL}/admin/login`, body);
+  studentLogin(body) {
+    return axios.post(`${API_URL}/students/login`, body);
   }
 
 
-  updateAdmin(body, id) {
-    return axios.put(`${API_URL}/admin`, body);
+  updateStudent(body, id) {
+    return axios.put(`${API_URL}/students`, body);
   }
 
-  getCurrentAdmin() {
-    return axios.get(`${API_URL}/admin/current`,{
+  getCurrentStudent() {
+    return axios.get(`${API_URL}/students/current`,{
       headers:{
         "Authorization":`Bearer ${localStorage.getItem('token')}` 
       }
     });
   }
 
-  AdminRegister(body) {
-    return axios.post(`${API_URL}/admin`, body);
+  studentRegister(body) {
+    return axios.post(`${API_URL}/students`, body);
   }
 
-  deleteAdmin(id) {
-    return axios.delete(`${API_URL}/admin/[id]`,id);
+  deleteStudent(id) {
+    return axios.delete(`${API_URL}/students/[id]`,id);
   }
 
-  employeeLogin(body) {
-    return axios.post(`${API_URL}/employees/login`, body);
-  }
+  // employeeLogin(body) {
+  //   return axios.post(`${API_URL}/employees/login`, body);
+  // }
 
-  updateEmployee(body, id) {
-    return axios.put(`${API_URL}/employees`, body);
-  }
+  // updateEmployee(body, id) {
+  //   return axios.put(`${API_URL}/employees`, body);
+  // }
 
-  getAllEmployee(page = 2, limit = 5) {
-    return axios.get(`${API_URL}/employees/`,{
-      params: { page, limit },
-      headers:{
-        "Authorization":`Bearer ${localStorage.getItem('token')}` 
-      }
-    });
-  }
+  // getAllEmployee(page = 2, limit = 5) {
+  //   return axios.get(`${API_URL}/employees/`,{
+  //     params: { page, limit },
+  //     headers:{
+  //       "Authorization":`Bearer ${localStorage.getItem('token')}` 
+  //     }
+  //   });
+  // }
 
 
-  deleteEmployee(id) {
-    return axios.delete(`${API_URL}/employees/[id]`,id);
-  }
+  // deleteEmployee(id) {
+  //   return axios.delete(`${API_URL}/employees/[id]`,id);
+  // }
 
-  employeeRegister(body) {
-    return axios.post(`${API_URL}/employees`, body,{
-      headers:{
-        "Authorization":`Bearer ${localStorage.getItem('token')}` 
-      }
-    });
-  }
+  // employeeRegister(body) {
+  //   return axios.post(`${API_URL}/employees`, body,{
+  //     headers:{
+  //       "Authorization":`Bearer ${localStorage.getItem('token')}` 
+  //     }
+  //   });
+  // }
 
-   getAllLaptops = (page = 2, limit = 5) => {
-    return axios.get(`${API_URL}/laptops/`, {
+   getAllBooks = (page = 2, limit = 5) => {
+    return axios.get(`${API_URL}/books/`, {
       params: { page, limit },
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -68,8 +68,8 @@ class AppServices {
     });
   };
 
-  registerLaptop(body) {
-    return axios.post(`${API_URL}/laptops/`,body,{
+  registerBook(body) {
+    return axios.post(`${API_URL}/books/`,body,{
       headers:{
         "Authorization":`Bearer ${localStorage.getItem('token')}` 
       }

@@ -12,30 +12,20 @@ export function SidebarComponent() {
           <Sidebar.Item href="/dashboard" icon={HiChartPie}>
             Dashboard
           </Sidebar.Item>
-          <Sidebar.Item href="/dashboard/employee" icon={HiViewBoards}>
-            Manage employees
-          </Sidebar.Item>
-          <Sidebar.Item href="/dashboard/laptops" icon={HiInbox}>
-            Laptops
+          <Sidebar.Item href="/dashboard/books" icon={HiInbox}>
+            Books
           </Sidebar.Item>
           <Sidebar.Item href="/dashboard/profile" icon={HiUser}>
             Profile
           </Sidebar.Item>
          
-          <Sidebar.Item href="#" icon={HiArrowSmRight}>
-            Sign In
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiTable}>
+          
+          <Sidebar.Item href="/dashboard/profile" icon={HiTable}>
             Logout
           </Sidebar.Item>
         </Sidebar.ItemGroup >
         <Sidebar.ItemGroup className="mt-24">
-          <Sidebar.Item href="#" icon={HiChartPie}>
-            Upgrade to Pro
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiViewBoards}>
-            Documentation
-          </Sidebar.Item>
+         
           <Sidebar.Item href="#" icon={BiBuoy}>
             Help
           </Sidebar.Item>

@@ -9,7 +9,7 @@ export const ProtectedRoute = ({ element: Element }) => {
 
   if (!token &&  pathname.split('/').includes("dashboard")) {
     console.log("PROTECTED ROUTE")
-    return <Navigate to="/adminLogin" />;
+    return <Navigate to="/studentLogin" />;
   }
   return <Element />;
 };

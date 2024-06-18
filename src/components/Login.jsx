@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
+import {toast,ToastContainer} from 'react-toastify'
 import AppServices from '../services/index';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
+  const [error,seterror]=useState('')
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -19,20 +21,19 @@ const Login = () => {
   const handleSubmit = async (values, { resetForm }) => {
     try {
       setLoading(true);
-      setError('');
-      const response = await AppServices.adminLogin(values);
+      const response = await AppServices.studentLogin(values);
       if (response?.status === 200) {
         setLoading(false);
-        localStorage.setItem('token',response.data.token)
+        localStorage.setItem('token', response.data.token);
         navigate('/dashboard');
         resetForm();
       } else {
         setLoading(false);
-        setError(response?.message || 'Error occurred while logging in');
+        toast.error(response?.message || 'Error occurred while logging in');
       }
     } catch (submissionError) {
       setLoading(false);
-      setError(submissionError?.message || 'An error occurred');
+      toast.error(submissionError?.message || 'An error occurred');
     }
   };
 
@@ -44,8 +45,10 @@ const Login = () => {
 
   const { handleChange, handleBlur, handleSubmit: submitForm, values, errors, touched } = formik;
 
+
   return (
     <section className="bg-blue-500 dark:bg-gray-900">
+      <ToastContainer />
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

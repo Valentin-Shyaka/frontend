@@ -14,30 +14,21 @@ const Signup = () => {
 
   const validationSchema = Yup.object().shape({
     fullNames: Yup.string().required("Full Names is required"),
-    phone: Yup.string()
-      .matches(/^\d+$/, "Phone must contain only numerical characters")
-      .required("Phone is required")
-      .min(10, "Phone must be 10 characters")
-      .max(10, "Phone must be 10 characters"),
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string()
       .required("Password is required")
       .min(6, "Password must be at least 6 characters"),
-    nationalId: Yup.string()
-      .matches(/^\d+$/, "ID must contain only numerical characters")
-      .required("NID is required")
-      .min(16, "NID must be 16 characters")
-      .max(16, "NID must be 16 characters"),
+    class:Yup.string().required('class is required')
   });
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
       setLoading(true);
       setError('');
-      const response = await AppServices.AdminRegister({...values,department:"IT",position:"manager"} );
+      const response = await AppServices.studentRegister(values);
       if (response?.status === 201) {
         setLoading(false);
-        navigate('/adminLogin');
+        navigate('/studentLogin');
         resetForm();
       } else {
         setLoading(false);
@@ -50,14 +41,14 @@ const Signup = () => {
   };
 
   const formik = useFormik({
-    initialValues: { email: '', password: '',fullNames:"",phone:'',nationalId:""},
+    initialValues: { email: '', password: '',fullNames:"",class:""},
     validationSchema,
     onSubmit: handleSubmit,
   });
 
   const { handleChange, handleBlur, handleSubmit: submitForm, values, errors, touched } = formik;
   return (
-    <section className="bg-gray-50 dark:bg-gray-900">
+    <section className="bg-blue-500 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-lg xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-6">
@@ -101,25 +92,9 @@ const Signup = () => {
                 {touched.email && errors.email && <div className="text-red-500 text-sm">{errors.email}</div>}
               </div>
 
-              <div className='flex w-full justify-between'>
+             
 
-              <div>
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Tel Number
-                </label>
-                <input
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.phone}
-                  type="number-pad"
-                  name="phone"
-                  id="phone"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="0788******"
-                  required=""
-                />
-                {touched.phone && errors.phone && <div className="text-red-500 text-sm">{errors.phone}</div>}
-              </div>
+              
               <div>
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Password
@@ -137,20 +112,20 @@ const Signup = () => {
                 />
                 {touched.password && errors.password && <div className="text-red-500 text-sm">{errors.password}</div>}
               </div>
-              </div>
+           
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  National ID
+                  Class
                 </label>
                 <input
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.nationalId}
+                  value={values.class}
                   type=""
-                  name="nationalId"
-                  id="nationalId"
+                  name="class"
+                  id="class"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="***********************18"
+                  placeholder="Year ... B"
                   required=""
                 />
                 {touched.nationalId && errors.nationalId && <div className="text-red-500 text-sm">{errors.nationalId}</div>}
@@ -186,7 +161,7 @@ const Signup = () => {
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account yet?{' '}
-                <a href="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">
+                <a href="/studentLogin" className="font-medium text-primary-600 hover:underline dark:text-primary-500">
                   Sign in
                 </a>
               </p>
