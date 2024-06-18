@@ -6,7 +6,12 @@ import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, Hi
 
 export function SidebarComponent() {
   return (
-    <Sidebar aria-label="Sidebar with content separator example" className="h-screen ">
+    <Sidebar aria-label="Sidebar with content separator example" className="h-screen  ">
+      <Sidebar.Logo>
+      <div className='w-full flex justify-center p-6'>
+            <img src={'/images.png'} width={100} height={100} alt="empty" className='justify-center'/>
+          </div>
+      </Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Item href="/dashboard" icon={HiChartPie}>

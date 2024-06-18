@@ -51,8 +51,11 @@ const Signup = () => {
     <section className="bg-blue-500 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-lg xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div className='w-full flex justify-center p-2'>
+            <img src={'/images.png'} width={100} height={100} alt="empty" className='justify-center'/>
+          </div>
           <div className="p-6 space-y-4 md:space-y-6 sm:p-6">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign Up 
             </h1>
             {error && <div className="text-red-500 text-sm">{error}</div>}
